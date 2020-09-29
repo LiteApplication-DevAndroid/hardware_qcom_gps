@@ -37,8 +37,11 @@ LOCAL_LDFLAGS += -Wl,--export-dynamic
 LOCAL_C_INCLUDES:= \
     $(LOCAL_PATH)/../platform_lib_abstractions
 
-LOCAL_COPY_HEADERS_TO:= gps.utils/
-LOCAL_COPY_HEADERS:= \
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/includes/gps.utils
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/include
+
+#LOCAL_COPY_HEADERS_TO:= gps.utils/
+#LOCAL_COPY_HEADERS:= \
    loc_log.h \
    loc_cfg.h \
    log_util.h \

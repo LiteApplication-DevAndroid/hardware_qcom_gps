@@ -2,6 +2,7 @@ ifneq ($(BUILD_TINY_ANDROID),true)
 #Compile this library only for builds with the latest modem image
 
 LOCAL_PATH := $(call my-dir)
+LOCAL_BOARD := $(LOCAL_PATH)/../../
 
 include $(CLEAR_VARS)
 
@@ -42,11 +43,14 @@ LOCAL_CFLAGS += \
      -Wno-error \
 
 LOCAL_C_INCLUDES:= \
-    $(TARGET_OUT_HEADERS)/gps.utils \
-    $(TARGET_OUT_HEADERS)/libloc_core
+    $(LOCAL_BOARD)/utils/includes/gps.utils \
+    $(LOCAL_BOARD)/core/includes/libloc_core
 
-LOCAL_COPY_HEADERS_TO:= libloc_eng/
-LOCAL_COPY_HEADERS:= \
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/includes/libloc_api_50001
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/include
+
+#LOCAL_COPY_HEADERS_TO:= libloc_eng/
+#LOCAL_COPY_HEADERS:= \
    LocEngAdapter.h \
    loc.h \
    loc_eng.h \
@@ -97,8 +101,8 @@ endif
 
 ## Includes
 LOCAL_C_INCLUDES:= \
-    $(TARGET_OUT_HEADERS)/gps.utils \
-    $(TARGET_OUT_HEADERS)/libloc_core
+    $(LOCAL_BOARD)/utils/includes/gps.utils \
+    $(LOCAL_BOARD)/core/includes/libloc_core
 
 LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE_RELATIVE_PATH := hw
